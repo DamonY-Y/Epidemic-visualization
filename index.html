@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" charset="utf-8">
+		<script src="./js/static/jquery-3.4.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/static/echarts/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/static/echarts/map/js/china.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+		<script src="./js/static/echarts/theme/vintage.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="./css/common.min.css" />
+		<link rel="stylesheet" type="text/css" href="./css/ptab-all.min.css" />
+		<title>疫情实时大数据报告</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<div class="logo">
+					<a href="#"><img src="img/bd_sm_logo.png" height="25px"></a>
+					<span>切换地区</span>
+				</div>
+				<h3>新型冠状病毒肺炎</h3>
+				<h1>疫情实时大数据报告</h1>
+				<span>共 8,715,179,320 人次已浏览</span>
+			</div>
+			<div class="analysis">
+				<div class="city-tab">
+					<a href="#to_domestic" class="active">国内疫情</a>
+					<a href="#to_foreign">国外疫情</a>
+					<a href="#">实时播报</a>
+				</div>
+				<div class="ptab-domestic-0" id="to_domestic">
+					<div class="title">
+						<div>国内疫情</div>
+						<div>
+							<div>数据更新至 <span>2021.02.27 19:26</span></div>
+							<div>数据说明</div>
+						</div>
+					</div>
+					<div class="content">
+						<div class="row">
+							<div class="col">
+								<div><span>现有确诊</span></div>
+								<div>523</div>
+								<div>昨日<span>-9</span></div>
+							</div>
+							<div class="col">
+								<div><span>无症状</span></div>
+								<div>258</div>
+								<div>昨日<span>+8</span></div>
+							</div>
+							<div class="col">
+								<div><span>现有疑似</span></div>
+								<div>2</div>
+								<div>昨日<span>+1</span></div>
+							</div>
+							<div class="col">
+								<div><span>现有重症</span></div>
+								<div>1</div>
+								<div>昨日<span>+0</span></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div><span>累计确诊</span></div>
+								<div>101,873</div>
+								<div>昨日<span>+34</span></div>
+							</div>
+							<div class="col">
+								<div><span>境外输入</span></div>
+								<div>4984</div>
+								<div>昨日<span>+10</span></div>
+							</div>
+							<div class="col">
+								<div><span>累计治愈</span></div>
+								<div>96,506</div>
+								<div>昨日<span>+43</span></div>
+							</div>
+							<div class="col">
+								<div><span>累计死亡</span></div>
+								<div>4,843</div>
+								<div>昨日<span>+0</span></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ptab-domestic-1">
+					<div class="title">
+						<div class="switch">
+							<input type="checkbox" id="switch-toggle-domestic" style="display: none;">
+							<label for="switch-toggle-domestic"></label>
+						</div>
+						<div>现有确诊病例数，排除治愈、死亡</div>
+					</div>
+					<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+						<div id="virus-map-0-0" style="width: 100%;height: 100%;visibility: visible;position: absolute;"></div>
+						<div id="virus-map-0-1" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+					</div>
+				</div>
+				<div class="ptab-domestic-2">
+					<div class="container">
+						<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+							<div id="virus-trend-0-0" style="width: 100%;height: 100%;visibility: visible;position: absolute;"></div>
+							<div id="virus-trend-0-1" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="virus-trend-0-2" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+						</div>
+						<div class="tab">
+							<div class="btn active">
+								<span>境外输入</span>
+								<span>新增趋势</span>
+							</div>
+							<div class="btn">
+								<span>境外输入</span>
+								<span>累计趋势</span>
+							</div>
+							<div class="btn">
+								<span>境外输入</span>
+								<span>省级TOP10</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ptab-domestic-3">
+					<div class="title">趋势图与国家卫健委官网发布一致，每日更新一次</div>
+					<div class="container">
+						<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+							<div id="virus-trend-1-0" style="width: 100%;height: 100%;visibility: visible;position: absolute;"></div>
+							<div id="virus-trend-1-1" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="virus-trend-1-2" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="virus-trend-1-3" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+						</div>
+						<div class="tab">
+							<div class="btn active">
+								<span>全国疫情</span>
+								<span>新增趋势</span>
+							</div>
+							<div class="btn">
+								<span>全国确诊</span>
+								<span>疑似趋势</span>
+							</div>
+							<div class="btn">
+								<span>全国累计</span>
+								<span>省级治愈死亡</span>
+							</div>
+							<div class="btn">
+								<span>治愈率</span>
+								<span>死亡率</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ptab-domestic-4">
+					<div class="title">
+						<p>国内各地区疫情统计汇总</p>
+						<span>7:00-10:00为更新高峰，数据若滞后敬请谅解</span>
+					</div>
+					<div class="container">
+						<table id="firstTable" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>
+									<div>各地区</div>
+								</th>
+								<th>
+									<div>无症状</div>
+								</th>
+								<th>
+									<div>现确诊</div>
+								</th>
+								<th>
+									<div>总确诊</div>
+								</th>
+								<th>
+									<div>已治愈</div>
+								</th>
+								<th>
+									<div>已死亡</div>
+								</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ptab-foreign-0" id="to_foreign">
+					<div class="title">
+						<div>国外疫情</div>
+						<div>
+							<div>数据更新至 <span id="foreign-updatetime">2021.02.27 19:26</span></div>
+							<div>数据说明</div>
+						</div>
+					</div>
+					<div class="content">
+						<div class="row">
+							<div class="col">
+								<div><span>现有确诊</span></div>
+								<div id="foreign-now">999</div>
+								<div>昨日<span id="foreign-now-add">999</span></div>
+							</div>
+							<div class="col">
+								<div><span>累计治愈</span></div>
+								<div id="foreign-heal">999</div>
+								<div>昨日<span id="foreign-heal-add">999</span></div>
+							</div>
+							<div class="col">
+								<div><span>累计死亡</span></div>
+								<div id="foreign-died">999</div>
+								<div>昨日<span id="foreign-died-add">999</span></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div><span>累计确诊</span></div>
+								<div id="foreign-total">9999</div>
+								<div>昨日<span id="foreign-total-add">99</span></div>
+							</div>
+							<div class="col">
+								<div><span ">治愈率</span></div>
+									<div id=" foreign-healrate">999</div>
+							</div>
+							<div class="col">
+								<div><span>病死率</span></div>
+								<div id="foreign-diedrate">99</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ptab-foreign-1">
+					<div class="title">
+						<div class="switch">
+							<input type="checkbox" id="switch-toggle-foreign" style="display: none;">
+							<label for="switch-toggle-foreign"></label>
+						</div>
+						<div>现有确诊病例数，排除治愈、死亡</div>
+					</div>
+					<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+						<div id="world-map-all" style="width: 100%;height: 100%;visibility: visible;position: absolute;">
+						</div>
+						<div id="world-map-cur" style="width: 100%;height: 100%;visibility: hidden;position: absolute;">
+						</div>
+					</div>
+				</div>
+
+				<div class="ptab-foreign-2">
+					<div class="title">趋势图每日更新一次</div>
+					<div class="container">
+						<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+							<div id="world-add-top10" style="width: 100%;height: 100%;visibility: visible;position: absolute;"></div>
+							<div id="South-America-Countries" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="North-America-Countries" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="Asian-Countries" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="European-Countries" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+						</div>
+						<div class="tab">
+							<div class="btn active">
+								<span>新增确诊</span>
+								<span>TOP10</span>
+							</div>
+							<div class="btn">
+								<span>南美多国</span>
+								<span>新增确诊</span>
+							</div>
+							<div class="btn">
+								<span>北美多国</span>
+								<span>新增确诊</span>
+							</div>
+							<div class="btn">
+								<span>亚洲多国</span>
+								<span>新增确诊</span>
+							</div>
+							<div class="btn">
+								<span>欧洲多国</span>
+								<span>新增确诊</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="ptab-foreign-3">
+					<div class="container">
+						<div class="show" style="width: 100%;height: 561px;overflow: hidden;position: relative;">
+							<div id="domestic-foreign-add" style="width: 100%;height: 100%;visibility: visible;position: absolute;"></div>
+							<div id="foreign-add-cur" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+							<div id="foreign-heal-died" style="width: 100%;height: 100%;visibility: hidden;position: absolute;"></div>
+						</div>
+						<div class="tab">
+							<div class="btn active">
+								<span>国内/国外</span>
+								<span>新增确诊</span>
+							</div>
+							<div class="btn">
+								<span>国外累计确诊/</span>
+								<span>现有确诊</span>
+							</div>
+							<div class="btn">
+								<span>国外</span>
+								<span>治愈/死亡</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="ptab-foreign-4">
+					<div class="title">
+						<h2>国外各国家疫情统计汇总</h2>
+						<span>7:00-10:00为更新高峰，数据若滞后敬请谅解</span>
+					</div>
+					<div class="container">
+						<table id="twoTable" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th>
+									<div>地区</div>
+								</th>
+								<th>
+									<div>现存</div>
+								</th>
+								<th>
+									<div>累计</div>
+								</th>
+								<th>
+									<div>治愈</div>
+								</th>
+								<th>
+									<div>死亡</div>
+								</th>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="loading">
+			<div class="loadDiv">
+				<div class="item1"><span class="default"></span></div>
+				<div class="item2"><span class="default"></span></div>
+				<div class="item3"><span class="default"></span></div>
+				<div class="item4"><span class="default"></span></div>
+				<div class="item5"><span class="default"></span></div>
+				<div class="item6"><span class="default"></span></div>
+				<div class="item7"><span class="default"></span></div>
+				<div class="item8"><span class="default"></span></div>
+				<div class="item9"><span class="default"></span></div>
+				<div class="item10"><span class="default"></span></div>
+				<div class="item11"><span class="default"></span></div>
+				<div class="item12"><span class="default"></span></div>
+				<p>加载中...</p>
+			</div>
+		</div>
+		</div>
+		<script src="./js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/component/domestic_main.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/component/foreign_main.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
